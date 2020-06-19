@@ -25,6 +25,14 @@ export function add2(number) {
   };
 }
 
+export function asyncAdd(number) {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(addNumber(number));
+    }, 3000);
+  };
+}
+
 export function addNumber(number) {
   return {
     type: ADD_NUMBER,
