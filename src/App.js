@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.scss";
 import Counter from "./Counter";
+import { add, sub, addNumber, plusTen } from "./redux/actions/actions";
 
 class App extends Component {
   render() {
@@ -19,9 +20,9 @@ class App extends Component {
           <button onClick={this.props.plus10}>Прибавить 10</button>
         </div>
         <div className="Actions">
-          <button onClick={() => this.props.addNamber(15)}>Добавить 15</button>
-          <button onClick={() => this.props.addNamber(35)}>Добавить 35</button>
-          <button onClick={() => this.props.addNamber(-48)}>Отнять -48</button>
+          <button onClick={() => this.props.addNumber(15)}>Добавить 15</button>
+          <button onClick={() => this.props.addNumber(35)}>Добавить 35</button>
+          <button onClick={() => this.props.addNumber(-48)}>Отнять -48</button>
         </div>
         <Counter />
       </div>
@@ -33,17 +34,17 @@ class App extends Component {
 // И уже их мы используем в компоненте при помощи приставки this
 
 function mapStateToProps(state) {
-  console.log("State", state.counter1.counter1);
+  console.log("State", state.counter1.counter);
   return {
     counter: state.counter1.counter,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    onAdd: () => dispatch({ type: "ADD" }),
-    onSub: () => dispatch({ type: "SUB" }),
-    plus10: () => dispatch({ type: "PLUS10" }),
-    addNamber: (number) => dispatch({ type: "ADDNAMB", payload: number }),
+    onAdd: () => dispatch(add()),
+    onSub: () => dispatch(sub()),
+    plus10: () => dispatch(plusTen()),
+    addNumber: (number) => dispatch(addNumber(number)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
